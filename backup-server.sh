@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-source config.sh
+DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+source "${DIR}/config.sh"
 
 ### Check if properly configured
 
@@ -22,7 +24,7 @@ if [ -z ${INFLUX_MACHINE_LABEL+x} ]; then echo "Variable 'INFLUX_MACHINE_LABEL' 
 
 ### End check of proper configuration
 
-CURRENT_DAY_NUM=`date '+%u'`
+CURRENT_DAY_NUM="$(date '+%u')"
 BACKUP_TARGET_DIRECTORY="${BACKUP_TARGET_ROOT}/$CURRENT_DAY_NUM"
 
 

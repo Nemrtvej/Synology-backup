@@ -2,13 +2,15 @@
 
 set -e
 
-wget -O backup-server.sh https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup-server.sh
-wget -O config.sh.tpl https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/config.sh.tpl
-wget -O backup.sh https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup.sh.tpl
+DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+wget -O "${DIR}/backup-server.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup-server.sh
+wget -O "${DIR}/config.sh.tpl" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/config.sh.tpl
+wget -O "${DIR}/backup.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup.sh.tpl
 
 
-DEFINED_VARIABLES="$(cat config.sh | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
-TEMPLATE_VARIABLES="$(cat config.sh.tpl | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
+DEFINED_VARIABLES="$(cat "${DIR}/config.sh" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
+TEMPLATE_VARIABLES="$(cat "${DIR}/config.sh.tpl" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
 
 DIFF_RESULT="$(diff <(echo "${DEFINED_VARIABLES}") <(echo "${TEMPLATE_VARIABLES}"))"
 
