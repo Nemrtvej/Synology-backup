@@ -6,7 +6,7 @@ DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 wget -O "${DIR}/backup-server.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup-server.sh
 wget -O "${DIR}/config.sh.tpl" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/config.sh.tpl
-wget -O "${DIR}/backup.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup.sh.tpl
+wget -O "${DIR}/update.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/update.sh
 
 
 DEFINED_VARIABLES="$(cat "${DIR}/config.sh" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
