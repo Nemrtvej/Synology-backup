@@ -4,6 +4,7 @@ set -e
 
 wget -O backup-server.sh https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup-server.sh
 wget -O config.sh.tpl https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/config.sh.tpl
+wget -O backup.sh https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/backup.sh.tpl
 
 
 DEFINED_VARIABLES="$(cat config.sh | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
