@@ -12,11 +12,16 @@ wget -O "${DIR}/update.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-b
 DEFINED_VARIABLES="$(cat "${DIR}/config.sh" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
 TEMPLATE_VARIABLES="$(cat "${DIR}/config.sh.tpl" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
 
+set +e
 DIFF_RESULT="$(diff <(echo "${DEFINED_VARIABLES}") <(echo "${TEMPLATE_VARIABLES}"))"
+DIFF_CODE="$?"
+set -e 
 
-if [ "$?" -ne 0 ]; then
+if [ "${DIFF_CODE}" -ne 0 ]; then
     echo "New version contains changes in config vars. Make sure to adjust your config properly".
     echo "${DIFF_RESULT}"
+else 
+    echo "Config seems up to date."
 fi
 
 
