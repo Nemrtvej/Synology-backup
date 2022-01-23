@@ -21,6 +21,7 @@ if [ -z ${INFLUX_PASSWORD+x} ]; then echo "Variable 'INFLUX_PASSWORD' is not def
 if [ -z ${INFLUX_HOSTNAME+x} ]; then echo "Variable 'INFLUX_HOSTNAME' is not defined! Terminating. "; exit 1; fi
 if [ -z ${INFLUX_DB+x} ]; then echo "Variable 'INFLUX_DB' is not defined! Terminating. "; exit 1; fi
 if [ -z ${INFLUX_MACHINE_LABEL+x} ]; then echo "Variable 'INFLUX_MACHINE_LABEL' is not defined! Terminating. "; exit 1; fi
+if [ -z ${REMOTE_SERVER_SMB_OPTIONS+x} ]; then echo "Variable 'REMOTE_SERVER_SMB_OPTIONS' is not defined! Terminating. "; exit 1; fi
 
 ### End check of proper configuration
 
@@ -39,7 +40,7 @@ fi
 
 mount \
     -t cifs \
-    -o "ro,iocharset=${REMOTE_SERVER_FILESYSTEM_CHARSET},username=${REMOTE_SERVER_USER_NAME},password=${REMOTE_SERVER_USER_PASSWORD},vers=3.0" \
+    -o "${REMOTE_SERVER_SMB_OPTIONS}ro,iocharset=${REMOTE_SERVER_FILESYSTEM_CHARSET},username=${REMOTE_SERVER_USER_NAME},password=${REMOTE_SERVER_USER_PASSWORD}" \
     "//${REMOTE_SERVER_IP}/${REMOTE_SERVER_DIRECTORY}" \
     "${LOCAL_MOUNTPOINT}"
 

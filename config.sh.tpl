@@ -22,6 +22,8 @@ LOCAL_BACKUP_USER_GROUP=users
 # Lokalni adresar, kam se budou dělat zálohy. Zde vznikají adresáře 1, 2, 3...
 BACKUP_TARGET_ROOT="/volume1/data/zalohy"
 
+# Dalsi nastaveni SMB pro dany server. Hodnota tohohle pole musi vzdy koncit carkou!
+REMOTE_SERVER_SMB_OPTIONS="vers=3.0,"
 
 # konfigurace monitoringu - ponechat beze změn kromě INFLUX_MACHINE_LABEL
 INFLUX_USERNAME=stats
