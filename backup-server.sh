@@ -56,4 +56,3 @@ curl \
     -i \
     --data-binary "synology_backups,server=${INFLUX_MACHINE_LABEL} finished=1" \
     -XPOST "https://${INFLUX_USERNAME}:${INFLUX_PASSWORD}@${INFLUX_HOSTNAME}/write?db=${INFLUX_DB}"
-

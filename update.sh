@@ -9,8 +9,8 @@ wget -O "${DIR}/config.sh.tpl" https://raw.githubusercontent.com/Nemrtvej/Synolo
 wget -O "${DIR}/update.sh" https://raw.githubusercontent.com/Nemrtvej/Synology-backup/master/update.sh
 
 
-DEFINED_VARIABLES="$(cat "${DIR}/config.sh" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
-TEMPLATE_VARIABLES="$(cat "${DIR}/config.sh.tpl" | grep -v "^#" | grep '=' | awk -F= '{print $1}')"
+DEFINED_VARIABLES="$(cat "${DIR}/config.sh" | grep -v "^#" | grep '=' | awk -F= '{print $1}' | sort )"
+TEMPLATE_VARIABLES="$(cat "${DIR}/config.sh.tpl" | grep -v "^#" | grep '=' | awk -F= '{print $1}' | sort )"
 
 set +e
 DIFF_RESULT="$(diff <(echo "${DEFINED_VARIABLES}") <(echo "${TEMPLATE_VARIABLES}"))"
