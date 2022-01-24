@@ -28,6 +28,8 @@ if [ -z ${REMOTE_SERVER_SMB_OPTIONS+x} ]; then echo "Variable 'REMOTE_SERVER_SMB
 CURRENT_DAY_NUM="$(date '+%u')"
 BACKUP_TARGET_DIRECTORY="${BACKUP_TARGET_ROOT}/$CURRENT_DAY_NUM"
 
+echo "Starting backup"
+date
 
 if [ ! -d "${BACKUP_TARGET_DIRECTORY}" ]; then
     mkdir -p "${BACKUP_TARGET_DIRECTORY}"
@@ -56,3 +58,6 @@ curl \
     -i \
     --data-binary "synology_backups,server=${INFLUX_MACHINE_LABEL} finished=1" \
     -XPOST "https://${INFLUX_USERNAME}:${INFLUX_PASSWORD}@${INFLUX_HOSTNAME}/write?db=${INFLUX_DB}"
+
+echo "Backup finished"
+date
