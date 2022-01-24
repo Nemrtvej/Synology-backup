@@ -46,7 +46,24 @@ mount \
     "//${REMOTE_SERVER_IP}/${REMOTE_SERVER_DIRECTORY}" \
     "${LOCAL_MOUNTPOINT}"
 
+
+set +e
+
+# 0 = "everything is OK"
+# 24 = "warning: some files vanished before they could be transferred"
+VALID_RSYNC_CODES=(0 24)
 rsync -o -g -a "${LOCAL_MOUNTPOINT}/" "${BACKUP_TARGET_DIRECTORY}"
+RSYNC_RESULT="$?"
+
+if [[ ${VALID_RSYNC_CODES[*]} =~ (^|[[:space:]])"${RSYNC_RESULT}"($|[[:space:]]) ]]; then
+    echo "Files copied successfully.";
+else
+    echo "Rsync file copy failed. Result code: ${RSYNC_RESULT}";
+    exit 1
+fi
+
+set -e
+
 chown -R "${LOCAL_BACKUP_USER_NAME}:${LOCAL_BACKUP_USER_GROUP}" "${BACKUP_TARGET_DIRECTORY}"
 
 umount "${LOCAL_MOUNTPOINT}"
