@@ -2,7 +2,8 @@
 
 Insert following value to the Synology task scheduler:
 
-```bash 
+```bash
+set -o pipefail
 /volume1/data/script/backups/backup-server.sh > /volume1/data/script/backups/last_run.log 2>&1
 ```
 
